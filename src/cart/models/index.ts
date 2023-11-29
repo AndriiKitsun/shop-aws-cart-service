@@ -1,16 +1,20 @@
-export type Product = {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-};
+// export type Product = {
+//   id: string;
+//   title: string;
+//   description: string;
+//   price: number;
+// };
+//
+// export type CartItem = {
+//   product: Product;
+//   count: number;
+// };
+//
+// export type Cart = {
+//   id: string;
+//   items: CartItem[];
+// };
 
-export type CartItem = {
-  product: Product;
-  count: number;
-};
-
-export type Cart = {
-  id: string;
-  items: CartItem[];
-};
+export * from './cart.model';
+export * from './cart-item.model';
+export * from './product.model';
