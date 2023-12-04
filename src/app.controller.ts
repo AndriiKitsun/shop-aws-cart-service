@@ -6,7 +6,7 @@ import {
   UseGuards,
   HttpStatus,
 } from '@nestjs/common';
-import { LocalAuthGuard, AuthService, BasicAuthGuard } from './auth';
+import { AuthService, BasicAuthGuard } from './auth';
 
 @Controller()
 export class AppController {
@@ -20,7 +20,8 @@ export class AppController {
     };
   }
 
-  @UseGuards(LocalAuthGuard)
+  // @UseGuards(LocalAuthGuard)
+  @UseGuards(BasicAuthGuard)
   @Post('api/auth/login')
   async login(@Request() req) {
     const token = this.authService.login(req.user, 'basic');
