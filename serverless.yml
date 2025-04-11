@@ -1,0 +1,52 @@
+service: cart-service
+frameworkVersion: "3"
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  timeout: 60
+  apiGateway:
+    shouldStartNameWithService: true
+
+# Exclude all files and leave dist folder
+#package:
+#  patterns:
+#    - '!*'
+#    - '!*/**'
+#    - 'dist/**'
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+      - http:
+          method: ANY
+          path: '{proxy+}'
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
